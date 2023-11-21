@@ -14,6 +14,10 @@ class Routes implements Coordinate {
     name: 'home_page',
     path: '/home',
   );
+   static const splash = Routes._(
+    name: 'splash_page',
+    path: '/splash',
+  );
 
   @override
   String toString() => 'name=$name, path=$path';
