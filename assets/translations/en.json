@@ -1,0 +1,57 @@
+{
+    "home":{
+        "title":"CITY STAR",
+        "enter":"Kelish",
+        "exit":"Ketish",
+        "registration":"Ro'yxatdan o'tish"
+    },
+    "login_page":{
+        "login":" Login",
+        "pass":" Parol",
+        "enter":"Kirish",
+        "error":"Login yoki parol kiritilmadi"
+    },
+    "search":{
+        "bekor_qilish":"Bekor qilish",
+        "tasdiqlash":"Tasdiqlash",
+        "hint":"Hududni tanlang",
+        "hint1":"Filialni tanlang",
+        "hint2":"Qanday ma’lumot izlayabsiz?",
+        "reja":"Tushum rejasi:",
+        "savdo":"Savdo rejasi:",
+        "bajarildi":"Bajarildi:",
+        "title":"Qidiruv"
+    },
+    "dashboard":{
+        "bugun":"Bugun",
+        "talab1":"Savdo rejasi",
+        "talab2":"Tushum summasi:",
+        "bajarildi":"Bajarilgan",
+        "qolgan":"Qolgan"
+    }, 
+    "setting":{
+        "title":"Sozlamalar",
+        "chiqish":"Chiqish",
+        "info1":"Rostdan ham",
+        "info2":"bu hisobdan chiqmoqchimisiz?",
+        "ha":"Ha",
+        "yoq":"Yo'q"
+    },
+    "star":{
+        "title":"Filtrlash",
+        "hint":"Oraliqni tanlang",
+        "empty":"Hududni va davr oralig'ini tanglang",
+        "save":"Saqlash",
+        "empty1":"Ma'lumot mavjud emas",
+        "kirim":"Kirim summasi:"
+    },
+    "storeInfo":{
+        "empty":"Ma'lumotlar yo'q",
+        "joriy":"Joriy oy ko'rsatkichlari:"
+    },
+    "error":{
+        "location":"Iltimos dasturdan foydaylanish uchun joylashuv ma'lumotlarini yoqing",
+        "workhome":"Iltimos dasturdan foydaylanish uchun ish joyingizda bo'ling"
+    }
+    
+}
