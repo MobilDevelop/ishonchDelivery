@@ -5,12 +5,12 @@ class AppIcons {
 
   static const String filter = 'assets/icons/filter.svg';
   static const String drawer = 'assets/icons/drawer.svg';
+  static const String logout = 'assets/icons/logout.svg';
 
 
 
   static const String logo = 'assets/images/logo.jpeg';
   static const String login = 'assets/images/login.png';
-  static const String logout = 'assets/images/logout.png';
   
   
   static const String button = 'assets/riv/button.riv';

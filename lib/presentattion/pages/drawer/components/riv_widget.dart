@@ -27,7 +27,7 @@ class RivWidget extends StatelessWidget {
           children: [
              AnimatedPositioned(
               duration: const Duration(milliseconds: 300),
-              height: 40.h,
+              height: 42.h,
               width: isActive? 230.w:0,
               left: 0,
               child: Container(

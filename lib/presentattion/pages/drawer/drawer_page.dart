@@ -1,5 +1,8 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:kuryer/application/drawer/drawer_cubit.dart';
 import 'package:kuryer/application/drawer/drawer_state.dart';
@@ -62,7 +65,30 @@ class DrawerPage extends StatelessWidget {
                 ),
               ),
               Gap(300.h),
-              Text("CHIQISH",style: AppTheme.data.textTheme.headlineSmall!.copyWith(color: AppTheme.colors.red),)
+              Bounce(
+                duration: const Duration(milliseconds: 200),
+                onPressed: (){
+                 AwesomeDialog(
+            context: context,
+            dialogType: DialogType.warning,
+            animType: AnimType.bottomSlide,
+            title: 'Rostdan ham',
+            desc: 'chiqmoqchimisiz?',
+            btnCancelText: "YO'Q",
+            btnOkText: "HA",
+            btnCancelOnPress: () {},
+            btnOkOnPress: () {},
+            ).show();
+                },
+                child: Row(
+                  children: [
+                    Gap(ScreenSize.w32),
+                    SvgPicture.asset(AppIcons.logout,color: AppTheme.colors.red,height: 30.h),
+                    Gap(ScreenSize.w12),
+                    Text("CHIQISH",style: AppTheme.data.textTheme.headlineSmall!.copyWith(color: AppTheme.colors.red),),
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -72,4 +98,3 @@ class DrawerPage extends StatelessWidget {
     );
   }
 }
-
