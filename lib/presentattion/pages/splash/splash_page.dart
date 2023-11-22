@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kuryer/application/splash/splash_cubit.dart';
 import 'package:kuryer/application/splash/splash_state.dart';
 import 'package:kuryer/presentattion/assets/theme/app_theme.dart';
+import 'package:kuryer/presentattion/routes/index_routes.dart';
 
 import 'animation_screen.dart';
 
@@ -13,7 +14,9 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(create: (context) => SplashCubit(),
      child: BlocListener<SplashCubit,SplashState>(listener: (_, state) {
-       
+       if(state is SplashNextHome){
+        context.go(Routes.login .path);
+       }
      },
      child: Builder(builder: (context) {
        final cubit = context.read<SplashCubit>();

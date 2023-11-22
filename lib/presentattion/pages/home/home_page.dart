@@ -8,7 +8,6 @@ import 'package:kuryer/application/home/home_state.dart';
 import 'package:kuryer/infrastructure/helper/rive_utils.dart';
 import 'package:kuryer/presentattion/assets/theme/app_theme.dart';
 import 'package:kuryer/presentattion/pages/drawer/drawer_page.dart';
-import 'package:kuryer/presentattion/pages/splash/animation_screen.dart';
 import 'package:rive/rive.dart';
 
 import 'components/leading_button.dart';
@@ -87,12 +86,14 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               top: 10.h,
               left: cubit.isSideMenuclosed?0:170.w,
                child: LeadingButton(press: (){
-                if(cubit.isSideMenuclosed){
+                 if(cubit.isPress){
+                   if(cubit.isSideMenuclosed){
                   _animationController.forward();
                 }else{
                   _animationController.reverse();
                 }
                 cubit.isOpen();
+                 }
                }, riveOnInit: (artboard) { 
                  StateMachineController controller = RiveUtils.getRiveController(
                   artboard,

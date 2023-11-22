@@ -22,7 +22,7 @@ class _AnimationScreenState extends State<AnimationScreen> with SingleTickerProv
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 5000),
+      duration: const Duration(milliseconds: 4000),
       vsync: this,
     );
     _animation = StaggeredRaindropAnimation(_controller);

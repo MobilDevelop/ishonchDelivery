@@ -12,6 +12,7 @@ class HomeCubit extends Cubit<HomeState>{
     late SMIBool isMenuOpen; 
 
     bool isSideMenuclosed = true;
+    bool isPress =true;
 
     int currentPage =0;
     
@@ -30,7 +31,9 @@ class HomeCubit extends Cubit<HomeState>{
     }
     
     void nextPage(String title){
-      switch (title) {
+      if(isPress){
+        isPress =false;
+        switch (title) {
         case "Home":currentPage=0;break;
         case "Reload":currentPage=1;break;
         case "User":currentPage=2;break;
@@ -38,8 +41,10 @@ class HomeCubit extends Cubit<HomeState>{
        isMenuOpen.value = !isMenuOpen.value;
       isSideMenuclosed = isMenuOpen.value;
       Future.delayed(const Duration(milliseconds: 1000),(){
+        isPress =true;
         emit(HomeNextWiew());  
-      }); 
+      });
+      }
     }
   
 }

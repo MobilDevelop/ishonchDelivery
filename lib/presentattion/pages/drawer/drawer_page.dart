@@ -44,12 +44,16 @@ class DrawerPage extends StatelessWidget {
               (menu) => RivWidget(
                 menu: menu, 
                 press: (){
+                  if(cubit.isPress){
+                  cubit.isPress=false;
                   cubit.selectWindow(menu);
                   menu.input!.change(true);
-                  Future.delayed(const Duration(seconds: 1),(){
+                  Future.delayed(const Duration(seconds: 2),(){
+                    cubit.isPress=true;
                      menu.input!.change(false);
                   });
                   onpress(menu.title);
+                  }
                 }, 
                 riveonInit: (artboard){
                  StateMachineController controller = RiveUtils.getRiveController(artboard,stateMachinaName: menu.stateMachineName);

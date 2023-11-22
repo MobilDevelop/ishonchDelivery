@@ -7,6 +7,8 @@ class DrawerCubit extends Cubit<DrawerState>{
 
   RiveAsset selectedMenu = sideMenus.first;
 
+  bool isPress = true;
+
   void selectWindow(RiveAsset menu){
     selectedMenu = menu;
     emit(DrawerInitial());

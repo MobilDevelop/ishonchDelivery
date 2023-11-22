@@ -18,6 +18,10 @@ class Routes implements Coordinate {
     name: 'splash_page',
     path: '/splash',
   );
+   static const login = Routes._(
+    name: 'login_page',
+    path: '/login',
+  );
 
   @override
   String toString() => 'name=$name, path=$path';

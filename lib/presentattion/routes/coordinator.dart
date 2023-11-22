@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:kuryer/presentattion/pages/home/home_page.dart';
+import 'package:kuryer/presentattion/pages/login/login_page.dart';
 import 'package:kuryer/presentattion/pages/splash/splash_page.dart';
 import 'index_routes.dart';
 
@@ -24,6 +25,14 @@ final GoRouter router = GoRouter(
         pageBuilder: (context, state) => MaterialPage<void>(
           key: state.pageKey,
           child:  const SplashPage(),
+        ),
+      ),
+       GoRoute(
+        name: Routes.login.name, 
+        path: Routes.login.path,
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          child:  const LoginPage(),
         ),
       ),
       

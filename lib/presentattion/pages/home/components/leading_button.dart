@@ -24,8 +24,8 @@ class LeadingButton extends StatelessWidget {
            shape: BoxShape.circle,
            color: AppTheme.colors.white,
            border: Border.all(
-             color: AppTheme.colors.primary,
-             width: .5
+             color: AppTheme.colors.secondary,
+             width: .7
            ),
            boxShadow: [
            BoxShadow(
@@ -36,7 +36,7 @@ class LeadingButton extends StatelessWidget {
            ]
          ),
          child: RiveAnimation.asset(AppIcons.menu_button,
-          onInit: riveOnInit
+          onInit: riveOnInit,
          ),
         ),
       ),
