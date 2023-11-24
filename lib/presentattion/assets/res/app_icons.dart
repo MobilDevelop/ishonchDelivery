@@ -12,6 +12,7 @@ class AppIcons {
 
 
   static const String logo = 'assets/images/logo.jpeg';
+  static const String curier = 'assets/images/curier.jpg';
   
   
   static const String button = 'assets/riv/button.riv';

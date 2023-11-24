@@ -25,7 +25,7 @@ class MyInterceptor extends Interceptor{
       RequestOptions options, RequestInterceptorHandler handler) async {
     options.headers['Content-Type'] = 'application/json';
     options.headers['Accept'] = 'application/json';
-    options.headers['Authorization'] = await LocalSource.getInfo('auth');
+    options.headers['Authorization'] = await LocalSource.getInfo(key: 'auth');
     options.baseUrl = AppContatants.mainUrl;
     super.onRequest(options, handler);
   }

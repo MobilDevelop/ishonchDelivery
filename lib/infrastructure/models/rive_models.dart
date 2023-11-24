@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:kuryer/presentattion/assets/res/app_icons.dart';
 import 'package:rive/rive.dart';
 
@@ -22,7 +23,7 @@ class RiveAsset{
 
 }
 List<RiveAsset> sideMenus = [
-  RiveAsset(src: AppIcons.icons, artboard: "HOME", stateMachineName: "HOME_interactivity", title: 'Home'),
-  RiveAsset(src: AppIcons.icons, artboard: "REFRESH/RELOAD", stateMachineName: 'RELOAD_Interactivity', title: 'Reload'),
-  RiveAsset(src: AppIcons.icons, artboard: "USER", stateMachineName: 'USER_Interactivity', title: 'User'),
+  RiveAsset(src: AppIcons.icons, artboard: "HOME", stateMachineName: "HOME_interactivity", title: tr('drawer.assignment')),
+  RiveAsset(src: AppIcons.icons, artboard: "REFRESH/RELOAD", stateMachineName: 'RELOAD_Interactivity', title: tr('drawer.completed')),
+  RiveAsset(src: AppIcons.icons, artboard: "USER", stateMachineName: 'USER_Interactivity', title: tr('drawer.user')),
 ];

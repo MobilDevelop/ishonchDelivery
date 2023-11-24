@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kuryer/infrastructure/models/rive_models.dart';
+import 'package:kuryer/presentattion/assets/res/screen_size.dart';
 import 'package:kuryer/presentattion/assets/theme/app_theme.dart';
 import 'package:rive/rive.dart';
 
@@ -17,13 +18,14 @@ class RivWidget extends StatelessWidget {
     return Column(
       children: [
         Padding(
-                padding: EdgeInsets.only(left: 15.w),
+                padding: EdgeInsets.only(left: ScreenSize.w10),
                 child: Divider(
                   color: AppTheme.colors.background,
                   height: 1,
                 ),
               ),
         Stack(
+          alignment: Alignment.center,
           children: [
              AnimatedPositioned(
               duration: const Duration(milliseconds: 300),

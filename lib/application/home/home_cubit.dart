@@ -34,9 +34,9 @@ class HomeCubit extends Cubit<HomeState>{
       if(isPress){
         isPress =false;
         switch (title) {
-        case "Home":currentPage=0;break;
-        case "Reload":currentPage=1;break;
-        case "User":currentPage=2;break;
+        case "HOME":currentPage=0;break;
+        case "REFRESH/RELOAD":currentPage=1;break;
+        case "USER":currentPage=2;break;
       }
        isMenuOpen.value = !isMenuOpen.value;
       isSideMenuclosed = isMenuOpen.value;

@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
@@ -10,6 +11,7 @@ import 'package:kuryer/infrastructure/helper/rive_utils.dart';
 import 'package:kuryer/infrastructure/models/rive_models.dart';
 import 'package:kuryer/presentattion/assets/asset_index.dart';
 import 'package:kuryer/presentattion/pages/drawer/components/riv_widget.dart';
+import 'package:kuryer/presentattion/routes/index_routes.dart';
 import 'package:rive/rive.dart';
 
 class DrawerPage extends StatelessWidget {
@@ -18,12 +20,14 @@ class DrawerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(create: (context) => DrawerCubit(),
-    child: BlocListener<DrawerCubit,DrawerState>(listener: (context, state) {
-      
+    child: BlocListener<DrawerCubit,DrawerState>(listener: (_, state) {
+      if(state is DrawerLogOut){
+          context.go(Routes.splash.path);
+      }
     },
     child: Builder(builder: (context) {
       final cubit = context.read<DrawerCubit>();
-      return BlocBuilder<DrawerCubit,DrawerState>(builder: (context, state) => Scaffold(
+      return BlocBuilder<DrawerCubit,DrawerState>(builder: (_, state) => Scaffold(
         body:  Container(
           height: double.maxFinite,
           width: 230.w,
@@ -52,7 +56,7 @@ class DrawerPage extends StatelessWidget {
                     cubit.isPress=true;
                      menu.input!.change(false);
                   });
-                  onpress(menu.title);
+                  onpress(menu.artboard);
                   }
                 }, 
                 riveonInit: (artboard){
@@ -81,7 +85,7 @@ class DrawerPage extends StatelessWidget {
             btnCancelText: "YO'Q",
             btnOkText: "HA",
             btnCancelOnPress: () {},
-            btnOkOnPress: () {},
+            btnOkOnPress:cubit.logOut,
             ).show();
                 },
                 child: Row(
@@ -89,7 +93,7 @@ class DrawerPage extends StatelessWidget {
                     Gap(ScreenSize.w32),
                     SvgPicture.asset(AppIcons.logout,color: AppTheme.colors.red,height: 30.h),
                     Gap(ScreenSize.w12),
-                    Text("CHIQISH",style: AppTheme.data.textTheme.headlineSmall!.copyWith(color: AppTheme.colors.red),),
+                    Text(tr('drawer.exit'),style: AppTheme.data.textTheme.headlineSmall!.copyWith(color: AppTheme.colors.red),),
                   ],
                 ),
               )

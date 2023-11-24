@@ -3,11 +3,11 @@ import 'package:hive_flutter/adapters.dart';
 class LocalSource {
   static var box = Hive.box("Mymemory");
 
-  static putInfo(String key, String json) async {
+  static putInfo({required String key, required String json}) async {
     await box.put(key, json);
   }
 
-  static Future<String> getInfo(String key) async {
+  static Future<String> getInfo({required String key}) async {
     String json = await box.get(key) ?? '';
     return json;
   }

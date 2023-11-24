@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,8 +20,7 @@ class LoginForm extends StatelessWidget {
       children: [
         Container(
           margin:  EdgeInsets.only(bottom: 40.h),
-          child:  Text(
-            "Tizimga kirish",style: AppTheme.data.textTheme.headlineSmall!.copyWith(color: AppTheme.colors.primary),
+          child:  Text(tr('login_page.title'),style: AppTheme.data.textTheme.headlineSmall!.copyWith(color: AppTheme.colors.primary),
           ),
         ),
         Stack(
@@ -70,7 +70,7 @@ class LoginForm extends StatelessWidget {
                         focusedBorder: InputBorder.none,
                         enabledBorder: InputBorder.none,
                         icon: SvgPicture.asset(AppIcons.login,height: 28.h),
-                        hintText: "Username",
+                        hintText: tr('login_page.login'),
                       ),
                     ),
                   ),
@@ -95,7 +95,7 @@ class LoginForm extends StatelessWidget {
                         focusedBorder: InputBorder.none,
                         enabledBorder: InputBorder.none,
                         icon: SvgPicture.asset(AppIcons.password,height: 28.h),
-                        hintText: "Password",
+                        hintText: tr('login_page.pass'),
                       ),
                     ),
                   ),
