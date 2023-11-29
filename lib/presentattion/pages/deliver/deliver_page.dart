@@ -60,10 +60,15 @@ class DeliverPage extends StatelessWidget {
                             if(index<cubit.items.length){
                               return DeliveryItem(
                              item: cubit.items[index],
-                            press:()=>cubit.onVisibleItem(cubit.items[index].id), 
+                            press:(){
+                              if(!cubit.loading){
+                                cubit.onVisibleItem(cubit.items[index].id);
+                              }
+                            }, 
                             buttonVisible: cubit.items[index].id==cubit.itemId, 
                             pressAccept: () { 
-                          AwesomeDialog(
+                              if(!cubit.loading){
+                                 AwesomeDialog(
                                     context: context,
                                     dialogType: DialogType.success,
                                     animType: AnimType.bottomSlide,
@@ -71,16 +76,19 @@ class DeliverPage extends StatelessWidget {
                                     btnCancelText: "YO'Q",
                                     btnOkText: "HA",
                                     btnCancelOnPress: () {},
-                                    btnOkOnPress:()=>cubit.onAccept(cubit.items[index].id),
+                                    btnOkOnPress:()=>cubit.onAccept(cubit.items[index]),
                                     ).show();
+                              }
                              }, 
                             pressCancel: () { 
-                               showModalBottomSheet(
+                             if(!cubit.loading){
+                                showModalBottomSheet(
                                 context: context, 
                                 backgroundColor: Colors.transparent,
                                 builder: (context) => DeliveryBottomSheet(
                                   press:cubit.onCancel
                                   ));
+                             }
                              });
                             }else{
                               return cubit.internetConnect?Visibility(

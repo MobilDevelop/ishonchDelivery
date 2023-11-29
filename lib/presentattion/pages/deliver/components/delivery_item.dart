@@ -1,11 +1,9 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:kuryer/domain/common/constants.dart';
 import 'package:kuryer/infrastructure/models/delivery_order/order_item.dart';
 import 'package:kuryer/presentattion/assets/res/app_icons.dart';
 import 'package:kuryer/presentattion/assets/res/screen_size.dart';
@@ -30,7 +28,7 @@ class DeliveryItem extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: ScreenSize.w10,vertical: ScreenSize.h10),
         padding: EdgeInsets.symmetric(horizontal: ScreenSize.w10,vertical: ScreenSize.h10),
         decoration: BoxDecoration(
-          color: buttonVisible?Colors.grey.shade100:AppTheme.colors.white,
+          color: item.saveMemory!=null?Colors.yellow.shade50:buttonVisible?Colors.grey.shade100:AppTheme.colors.white,
           boxShadow: [
             BoxShadow(
               color: AppTheme.colors.grey.withOpacity(.6),
@@ -40,8 +38,8 @@ class DeliveryItem extends StatelessWidget {
             )
           ],
           border: Border.all(
-            color: buttonVisible? AppTheme.colors.primary:AppTheme.colors.secondary,
-            width: buttonVisible?1.5:.6
+            color: item.saveMemory!=null? AppTheme.colors.yellow:buttonVisible? AppTheme.colors.primary:AppTheme.colors.secondary,
+            width: item.saveMemory!=null?1.5:buttonVisible?1.5:.6
           ),
           borderRadius: BorderRadius.circular(15.r)
         ),
@@ -167,28 +165,35 @@ class DeliveryItem extends StatelessWidget {
                     ],
                   ),
                 ),
-            Gap(ScreenSize.h8),
-            DottedLine(dashColor: AppTheme.colors.grey),
-            Gap(ScreenSize.h8),
-                 Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-         children: [
-      Expanded(
-        child: 
-        BorderButton(
-            onPressed: pressCancel,
-            text: tr("delivery.cancel"),
-            borderColor: AppTheme.colors.red),
-      ),
-    Gap(15.h),
-      Expanded(
-          child:BorderButton(
-        onPressed: pressAccept,
-        text: tr("delivery.accept"),
-      )
-    )
-    ],
-    ),     
+                 Visibility(
+                  visible: item.saveMemory==null,
+                   child: Column(
+                     children: [
+                       Gap(ScreenSize.h8),
+                        DottedLine(dashColor: AppTheme.colors.grey),
+                        Gap(ScreenSize.h8),
+                       Row(
+                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                           Expanded(
+                             child: 
+                             BorderButton(
+                                 onPressed: pressCancel,
+                                 text: tr("delivery.cancel"),
+                                 borderColor: AppTheme.colors.red),
+                           ),
+                         Gap(15.h),
+                           Expanded(
+                               child:BorderButton(
+                             onPressed: pressAccept,
+                             text: tr("delivery.accept"),
+                           )
+                         )
+                         ],
+                         ),
+                     ],
+                   ),
+                 ),     
               ],
             ))      
           ],

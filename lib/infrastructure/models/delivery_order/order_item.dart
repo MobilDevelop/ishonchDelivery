@@ -12,6 +12,7 @@ class OrderItem{
  String name;
  String comment;
  String productTitle;
+ String? saveMemory;
  
   OrderItem({
     required this.id,
@@ -22,7 +23,8 @@ class OrderItem{
     required this.addtionalPhone,
     required this.name,
     required this.comment,
-    required this.productTitle
+    required this.productTitle,
+    this.saveMemory
   });
 
   factory OrderItem.fromJson(Map<String,dynamic> json)=>OrderItem(
@@ -45,7 +47,8 @@ class OrderItem{
     addtionalPhone: json['additionalPhone']??"", 
     name: json['name']??"", 
     comment: json['comment']??"", 
-    productTitle: json['productTitle']??"");
+    productTitle: json['productTitle']??"",
+    saveMemory: json['save']);
 
 
     Map<String,dynamic> toJson()=>{
@@ -57,6 +60,7 @@ class OrderItem{
       "additionalPhone":addtionalPhone,
       "name":name,
       "comment":comment,
-      "productTitle":productTitle
+      "productTitle":productTitle,
+      "save":null
     };
 }
