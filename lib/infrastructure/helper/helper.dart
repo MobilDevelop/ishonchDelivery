@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 import 'package:easy_localization/easy_localization.dart';
+import 'package:kuryer/infrastructure/models/universal/location.dart';
+import 'package:location/location.dart';
 
 class Helper{
   static int randomNumber(){
@@ -9,6 +11,10 @@ class Helper{
 
   static String dateFormat(DateTime? date){
       return date==null?"": DateFormat('yyyy-MM-dd').format(date);
+  }
+
+  static String dateTimeFormat(){
+    return DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
   }
 
   static String formatDate() {
@@ -64,19 +70,6 @@ class Helper{
     } else {
       count = value;
     }
-  //   if(value.length>=10){
-  //    int coast = int.parse(value);
-  //    String million = (coast/1000000000).toString();
-    
-  //   return "$million mlrd so'm";
-  //  }
-
-  //  if(value.length>=7){
-  //    int coast = int.parse(value);
-  //    String million = (coast/1000000).toString();
-    
-  //   return "$million mln so'm";
-  //  }
     return "$count so'm";
   }
 
@@ -106,6 +99,37 @@ class Helper{
       count = value;
     }
     return count;
+  }
+
+ Future<LocationObject> getCurrentLocation(Location location) async {
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
+    LocationObject locationObject = LocationObject(latitude: '-1', longtude: '-1');
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return Future.value(LocationObject(latitude: "-1", longtude: '-1'));
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+      return Future.value(LocationObject(latitude: "-1", longtude: '-1'));
+      }
+    }
+
+    _locationData = await location.getLocation();
+
+    if (_locationData.accuracy! <= 100) {
+      if (!_locationData.isMock!) {
+        locationObject = LocationObject(latitude: _locationData.latitude.toString(), longtude: _locationData.longitude.toString());
+      }
+    }
+    return Future.value(locationObject);
   }
 
 }

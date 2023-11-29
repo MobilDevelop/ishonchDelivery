@@ -7,6 +7,9 @@ static String mainUrl = "http://192.168.13.138:8002";//test URL
   static String addition = "/api/";//test
    
   static String login = '${addition}login';
+  static String order = '${addition}m_delivery_order';
+  static String confirm = '${addition}m_confirm_delivery';
+  static String completed = '${addition}m_delivery_order';
 
   static String appVersion = '1.2.2';
 

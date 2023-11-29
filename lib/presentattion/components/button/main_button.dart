@@ -63,7 +63,7 @@ class MainButton extends StatelessWidget {
       duration: const Duration(milliseconds: 150),
       child: Container(
         width: wrap ? null : double.infinity,
-        height: wrap ? null : 80.h,
+        height: wrap ? null : 45.h,
         alignment: Alignment.center,
         padding: wrap
             ? EdgeInsets.symmetric(

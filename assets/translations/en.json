@@ -18,6 +18,18 @@
         "exit":"CHIQISH"
 
     },
+    "delivery":{
+        "title":"Topshiriq",
+        "cancel":"Bekor qilish",
+        "accept":"Tasdiqlash",
+        "address":"Manzil:",
+        "orientation":"Mo'ljal:",
+        "phone":"Telefon raqami:",
+        "addtionalphone":"Qo'shimcha telefon raqami:",
+        "comment":"Izoh: ",
+        "error":"Server bilan aloqa yo'q"
+
+    },
     "user_page":{
         "title":"Kabinet",
         "carnumber":"Avtomobil raqami:",

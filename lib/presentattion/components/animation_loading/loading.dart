@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:kuryer/infrastructure/helper/helper.dart';
+import 'package:kuryer/presentattion/assets/res/screen_size.dart';
 import 'package:kuryer/presentattion/assets/theme/app_theme.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -29,13 +30,12 @@ class Loading extends StatelessWidget {
        case 15:current = Center(child: LoadingAnimationWidget.stretchedDots(color: AppTheme.colors.secondary, size: 120));break;
        case 16:current = Center(child: LoadingAnimationWidget.halfTriangleDot(color: AppTheme.colors.secondary, size: 120));break;
      }
-     return SizedBox(
-      height: double.maxFinite,
-      width: double.maxFinite,
+     return Container(
+      //padding: EdgeInsets.all(ScreenSize.h32),
       child: ClipRect(
         child: BackdropFilter(
              filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-             child: current,
+             child: current
              ),
       ),
      );

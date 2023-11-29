@@ -27,6 +27,8 @@ class LoginCubit extends Cubit<LoginState>{
     emit(LoginInitial());
     dynamic userInfo = await LoginServices().getInfo(LoginSend(login: username, password: password).toJson());
      if(userInfo.isNotEmpty){
+      String basicAuth ='Basic ${base64.encode(utf8.encode('$username:$password'))}';
+      LocalSource.putInfo(key: "auth", json: basicAuth);
       LocalSource.putInfo(key: 'userInfo',json: jsonEncode(userInfo));
       emit(LoginNextHome());
      }else{

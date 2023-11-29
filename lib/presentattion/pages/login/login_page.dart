@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kuryer/application/login/login_cubit.dart';
 import 'package:kuryer/application/login/login_state.dart';
 import 'package:kuryer/presentattion/assets/theme/app_theme.dart';
+import 'package:kuryer/presentattion/components/animation_loading/car_loading.dart';
 import 'package:kuryer/presentattion/components/animation_loading/loading.dart';
 import 'package:kuryer/presentattion/pages/login/components/background.dart';
 import 'package:kuryer/presentattion/pages/login/components/login_form.dart';
@@ -43,7 +44,7 @@ class LoginPage extends StatelessWidget {
               ),
                Visibility(
                 visible: cubit.loading,
-                child: const Loading())
+                child: const CarLoading())
           ],
         ),
       ));

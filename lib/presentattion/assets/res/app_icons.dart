@@ -7,12 +7,16 @@ class AppIcons {
   static const String drawer = 'assets/icons/drawer.svg';
   static const String logout = 'assets/icons/logout.svg';
   static const String login = 'assets/icons/login.svg';
+  static const String location = 'assets/icons/location.svg';
+  static const String mlocation = 'assets/icons/mlocation.svg';
   static const String password = 'assets/icons/password.svg';
+  static const String swap = 'assets/icons/swap.svg';
 
 
 
   static const String logo = 'assets/images/logo.jpeg';
   static const String curier = 'assets/images/curier.jpg';
+  static const String loading = 'assets/images/loading.webp';
   
   
   static const String button = 'assets/riv/button.riv';
