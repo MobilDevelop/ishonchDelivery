@@ -16,7 +16,7 @@ class SuccesItem{
     pruductId: json['id'], 
     dateTime: json['datetime'], 
     latitude: json['latitude'], 
-    longtude: json['longtude'],
+    longtude: json['longitude'],
     name: json['name'],
     title: json['title'],
     amount: json['amount']
@@ -26,14 +26,14 @@ class SuccesItem{
     "output_product_id":pruductId,
     "delivery_at":dateTime,
     "latitude":latitude,
-    "longtude":longtude
+    "longitude":longtude
   };
 
   Map<String,dynamic> saveToJson()=>{
     "id":pruductId,
     "datetime":dateTime,
     "latitude":latitude,
-    "longtude":longtude,
+    "longitude":longtude,
     "name":name,
     "title":title,
     "amount":amount

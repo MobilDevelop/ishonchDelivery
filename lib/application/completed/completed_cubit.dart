@@ -12,9 +12,11 @@ class CompletedCubit extends Cubit<CompletedState>{
     init();
   }
 
-  int page = 1;
+  int page1 = 1;
+  int page2 = 1;
 
-  List<CompltedItem> items =[];
+  List<CompltedItem> itemsCompleted =[];
+  List<CompltedItem> itemsCanceled =[];
 
   bool loading = true;
   bool serviceConnect =true;
@@ -27,11 +29,11 @@ class CompletedCubit extends Cubit<CompletedState>{
   final result = await InternetAddress.lookup('example.com');
   if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
     internetConnect=true;
-      List<CompltedItem>  pageItems = await CompletedServices().init("",page.toString());
+      List<CompltedItem>  pageItems = await CompletedServices().init("delivered",page1.toString());
      if(pageItems.isNotEmpty){
-      items.addAll(pageItems);
-      await LocalSource.putInfo(key: "completed", json: jsonEncode(items.map((item) => item.toJson()).toList()));
-      page++;
+      itemsCompleted.addAll(pageItems);
+      await LocalSource.putInfo(key: "completed", json: jsonEncode(itemsCompleted.map((item) => item.toJson()).toList()));
+      page1++;
       pageItems.clear();
      }else{
       serviceConnect=false;
@@ -41,8 +43,32 @@ class CompletedCubit extends Cubit<CompletedState>{
   internetConnect=false;
    String jsonItems = await LocalSource.getInfo(key: "completed");
    if(jsonItems.isNotEmpty){
-    items.clear();
-    items = completedItemMemoryFromMap(jsonDecode(jsonItems));
+    itemsCompleted.clear();
+    itemsCompleted = completedItemMemoryFromMap(jsonDecode(jsonItems));
+   }
+}
+
+
+try { 
+  final result = await InternetAddress.lookup('example.com');
+  if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+    internetConnect=true;
+      List<CompltedItem>  pageItems = await CompletedServices().init("canceled",page2.toString());
+     if(pageItems.isNotEmpty){
+      itemsCompleted.addAll(pageItems);
+      await LocalSource.putInfo(key: "canceled", json: jsonEncode(itemsCompleted.map((item) => item.toJson()).toList()));
+      page2++;
+      pageItems.clear();
+     }else{
+      serviceConnect=false;
+     }
+  }
+} on SocketException catch (_){
+  internetConnect=false;
+   String jsonItems = await LocalSource.getInfo(key: "canceled");
+   if(jsonItems.isNotEmpty){
+    itemsCompleted.clear();
+    itemsCompleted = completedItemMemoryFromMap(jsonDecode(jsonItems));
    }
 }
     loading =false;
@@ -51,10 +77,11 @@ class CompletedCubit extends Cubit<CompletedState>{
   }
 
   Future listRefresh()async{
-    page=1;
+    page1=1;
+    page2=1;
     serviceConnect=true;
     loading=true;
-    items.clear();
+    itemsCompleted.clear();
     emit(CompletedInitial());
     init();
   }

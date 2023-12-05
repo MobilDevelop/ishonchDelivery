@@ -35,9 +35,21 @@
         "carnumber":"Avtomobil raqami:",
         "phone":"Telefon raqami:"
     },
+    "splash":{
+      "title":"Yuklanmaganlar",
+      "datetime":"Tasdiqlangan vaqti:",
+      "cancel":"Chiqish",
+      "upload":"Yuklash",
+      "reason":"Sababi: ",
+      "comment":"Izoh: "
+
+
+    },
     "error":{
         "location":"Iltimos dasturdan foydaylanish uchun joylashuv ma'lumotlarini yoqing",
-        "workhome":"Iltimos dasturdan foydaylanish uchun ish joyingizda bo'ling"
+        "workhome":"Iltimos dasturdan foydaylanish uchun ish joyingizda bo'ling",
+        "canceled":"Bekor qilishda qandaydir hatolik yuz berdi",
+        "canceled1":"Tasdiqlashda qandaydir hatolik yuz berdi"
     }
     
 }

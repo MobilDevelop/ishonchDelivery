@@ -1,17 +1,22 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:kuryer/infrastructure/models/delivery_order/cancel_item.dart';
 import 'package:kuryer/presentattion/assets/res/screen_size.dart';
 import 'package:kuryer/presentattion/assets/theme/app_theme.dart';
-import 'package:kuryer/presentattion/components/button/border_button.dart';
 import 'package:kuryer/presentattion/components/button/main_button.dart';
 
 class DeliveryBottomSheet extends StatelessWidget {
   const DeliveryBottomSheet({
-    super.key, required this.press,
+    super.key, required this.press, required this.onChanged, required this.items, required this.item, required this.controller,
   });
   final VoidCallback press;
+  final List<CancelItem> items;
+  final CancelItem? item;
+  final Function onChanged;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,11 +42,28 @@ class DeliveryBottomSheet extends StatelessWidget {
             ),
           ),
           Gap(ScreenSize.h32),
-          Container(
-            height: 70,
-            width: double.maxFinite,
-            color: Colors.green,
-          ),
+          DropdownSearch<CancelItem>(
+                                mode: Mode.MENU,
+                                items: items,
+                                dropdownSearchDecoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal:0),
+                                hintText: tr('search.hint'),
+                                prefixIcon: Visibility(
+                                  visible: false,
+                                  child: IconButton(onPressed: (){}, icon: const Icon(Icons.close,color: Colors.black))),
+                                enabledBorder: OutlineInputBorder(
+                                borderRadius:BorderRadius.circular(10.r),
+                                borderSide: BorderSide(
+                                color: AppTheme.colors.primary)),
+                                focusedBorder: OutlineInputBorder(
+                                borderRadius:BorderRadius.circular(10.r),
+                                borderSide: BorderSide(
+                                color: AppTheme.colors.primary))),
+                                selectedItem: item,
+                                itemAsString: (CancelItem? item) {
+                                return item!.title.toString();},
+                                onChanged: (item)=>onChanged(item)
+                                ),
           Gap(ScreenSize.h32),
            Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,6 +80,7 @@ class DeliveryBottomSheet extends StatelessWidget {
                   )
                 ),
                 child: TextField(
+                  controller: controller,
                   maxLines: 5,
                 ),
                ),
@@ -84,6 +107,7 @@ class DeliveryBottomSheet extends StatelessWidget {
         onPressed: (){
           press();
           Navigator.pop(context);
+          press();
           },
         text: tr('delivery.accept'),
       )

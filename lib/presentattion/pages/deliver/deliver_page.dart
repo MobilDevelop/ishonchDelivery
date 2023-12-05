@@ -7,6 +7,7 @@ import 'package:kuryer/application/deliver/deliver_state.dart';
 import 'package:kuryer/presentattion/assets/asset_index.dart';
 import 'package:kuryer/presentattion/components/animation_loading/car_loading.dart';
 import 'package:kuryer/presentattion/components/animation_loading/loading.dart';
+import 'package:kuryer/presentattion/routes/index_routes.dart';
 import 'components/delivery_bottom_sheet.dart';
 import 'components/delivery_item.dart';
 
@@ -17,7 +18,19 @@ class DeliverPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(create: (context) => DeliverCubit(),
      child: BlocListener<DeliverCubit,DeliverState>(listener: (_, state) {
-       
+       if(state is DeliverNextSplash){
+        context.go(Routes.splash.path);
+       }else if(state is DeliveryMessage){
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: AppTheme.colors.primary,
+              content: Text(
+                state.message,
+                textAlign: TextAlign.center,
+                style: AppTheme.data.textTheme.bodyMedium!.copyWith(color: AppTheme.colors.white)
+              ),
+            ));
+       }
      },
       child: Builder(builder: (context) {
         final cubit  = context.read<DeliverCubit>();
@@ -82,11 +95,16 @@ class DeliverPage extends StatelessWidget {
                              }, 
                             pressCancel: () { 
                              if(!cubit.loading){
+                                cubit.cancelItem=null;
                                 showModalBottomSheet(
                                 context: context, 
                                 backgroundColor: Colors.transparent,
                                 builder: (context) => DeliveryBottomSheet(
-                                  press:cubit.onCancel
+                                  press:()=>cubit.onCancel(cubit.items[index]), 
+                                  item: cubit.cancelItem, 
+                                  items: cubit.cancelItems, 
+                                  onChanged:(canceled)=>cubit.onselectCancel(canceled), 
+                                  controller: cubit.cancelCommit,
                                   ));
                              }
                              });

@@ -3,7 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 class LocalSource {
   static var box = Hive.box("Mymemory");
 
-  static putInfo({required String key, required String json}) async {
+  static putInfo({required String key, required String? json}) async {
     await box.put(key, json);
   }
 

@@ -61,6 +61,6 @@ class OrderItem{
       "name":name,
       "comment":comment,
       "productTitle":productTitle,
-      "save":null
+      "save":saveMemory
     };
 }

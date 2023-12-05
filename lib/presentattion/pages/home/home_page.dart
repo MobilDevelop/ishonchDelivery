@@ -57,55 +57,58 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
      child: Builder(builder: (context) {
        final cubit = context.read<HomeCubit>();
 
-       return BlocBuilder<HomeCubit,HomeState>(builder: (_, state) => Scaffold(
-         backgroundColor: AppTheme.colors.stroke,
-         body: Stack(
-           children: [
-             AnimatedPositioned(
-              duration: const Duration(milliseconds: 200),  
-              curve: Curves.fastOutSlowIn,
-              width: 260.w,
-              left: cubit.isSideMenuclosed? -260.w:0, 
-              height: double.maxFinite,
-              child:  DrawerPage(onpress: (String title)=>cubit.nextPage(title))),
-              Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.identity()..setEntry(3, 2, 0.001)..rotateY(animation.value-30*animation.value*pi/180),
-                child: Transform.translate(
-                  offset:Offset(animation.value*210 .w, 0), 
-                  child: Transform.scale(
-                    scale: scalAnimation.value,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(25.r),
-                      child: cubit.views[cubit.currentPage])),
-                  ),
-              ),
-             AnimatedPositioned(
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.fastOutSlowIn,
-              top: 10.h,
-              left: cubit.isSideMenuclosed?0:170.w,
-               child: LeadingButton(press: (){
-                 if(cubit.isPress){
-                   if(cubit.isSideMenuclosed){
-                  _animationController.forward();
-                }else{
-                  _animationController.reverse();
-                }
-                cubit.isOpen();
-                 }
-               }, riveOnInit: (artboard) { 
-                 StateMachineController controller = RiveUtils.getRiveController(
-                  artboard,
-                  stateMachinaName: "State Machine");
-                 cubit.isMenuOpen = controller.findSMI("isOpen")as SMIBool;
-                 cubit.isMenuOpen.value=true;
-                }),
-             ),
-             
-           ],
+       return BlocBuilder<HomeCubit,HomeState>(builder: (_, state) => WillPopScope(
+         onWillPop: ()=>cubit.onWillPop(),
+         child: Scaffold(
+           backgroundColor: AppTheme.colors.stroke,
+           body: Stack(
+             children: [
+               AnimatedPositioned(
+                duration: const Duration(milliseconds: 200),  
+                curve: Curves.fastOutSlowIn,
+                width: 260.w,
+                left: cubit.isSideMenuclosed? -260.w:0, 
+                height: double.maxFinite,
+                child:  DrawerPage(onpress: (String title)=>cubit.nextPage(title))),
+                Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()..setEntry(3, 2, 0.001)..rotateY(animation.value-30*animation.value*pi/180),
+                  child: Transform.translate(
+                    offset:Offset(animation.value*210 .w, 0), 
+                    child: Transform.scale(
+                      scale: scalAnimation.value,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(25.r),
+                        child: cubit.views[cubit.currentPage])),
+                    ),
+                ),
+               AnimatedPositioned(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.fastOutSlowIn,
+                top: 10.h,
+                left: cubit.isSideMenuclosed?0:170.w,
+                 child: LeadingButton(press: (){
+                   if(cubit.isPress){
+                     if(cubit.isSideMenuclosed){
+                    _animationController.forward();
+                  }else{
+                    _animationController.reverse();
+                  }
+                  cubit.isOpen();
+                   }
+                 }, riveOnInit: (artboard) { 
+                   StateMachineController controller = RiveUtils.getRiveController(
+                    artboard,
+                    stateMachinaName: "State Machine");
+                   cubit.isMenuOpen = controller.findSMI("isOpen")as SMIBool;
+                   cubit.isMenuOpen.value=true;
+                  }),
+               ),
+               
+             ],
+           ),
+          
          ),
-        
        ));
      },),
      ),

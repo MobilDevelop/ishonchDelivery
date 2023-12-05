@@ -1,4 +1,5 @@
- import 'package:easy_localization/easy_localization.dart';
+ import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,7 +36,18 @@ class CompletedPage extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         child: Text("Yakunlangan",style: AppTheme.data.textTheme.headlineSmall!.copyWith(color: AppTheme.colors.white))),
                   Expanded(
-                      child: NotificationListener<ScrollNotification>(
+                      child: ContainedTabBarView(
+                        tabBarProperties: TabBarProperties(
+                          indicatorColor: AppTheme.colors.primary,
+                          unselectedLabelColor: AppTheme.colors.grey,
+                          labelColor: AppTheme.colors.primary
+                        ),
+                      tabs: const [
+                        Text("Tasdiqlangan"),
+                        Text("Bekor qilingan")
+                      ], 
+                      views: [
+                        NotificationListener<ScrollNotification>(
                         onNotification: (notification){
                           if(notification.metrics.pixels==notification.metrics.maxScrollExtent){
                             if(!cubit.loading){
@@ -49,16 +61,16 @@ class CompletedPage extends StatelessWidget {
                           onRefresh: cubit.listRefresh,
                           color: AppTheme.colors.primary,
                           child: ListView.builder(
-                          itemCount: cubit.items.length+1,
+                          itemCount: cubit.itemsCompleted.length+1,
                           padding: const EdgeInsets.all(0),
                           itemBuilder: (_, index){
-                            if(index<cubit.items.length){
-                              return CompletedItem(item: cubit.items[index]);
+                            if(index<cubit.itemsCompleted.length){
+                              return CompletedItem(item: cubit.itemsCompleted[index]);
                             }else{
                               return cubit.internetConnect?Visibility(
                                 visible: !cubit.loading,
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: ScreenSize.h32),
+                                  //padding: EdgeInsets.symmetric(vertical: ScreenSize.h32),
                                   child: const Center(child: Loading()),
                                 ),
                               ):Container(
@@ -70,7 +82,44 @@ class CompletedPage extends StatelessWidget {
                             }
                           }
                           ),
-                        )))      
+                        )),
+                        NotificationListener<ScrollNotification>(
+                        onNotification: (notification){
+                          if(notification.metrics.pixels==notification.metrics.maxScrollExtent){
+                            if(!cubit.loading){
+                              cubit.init();
+                            }
+                            return true;
+                          }
+                          return false;
+                        },
+                        child: RefreshIndicator(
+                          onRefresh: cubit.listRefresh,
+                          color: AppTheme.colors.primary,
+                          child: ListView.builder(
+                          itemCount: cubit.itemsCanceled.length+1,
+                          padding: const EdgeInsets.all(0),
+                          itemBuilder: (_, index){
+                            if(index<cubit.itemsCanceled.length){
+                              return CompletedItem(item: cubit.itemsCanceled[index]);
+                            }else{
+                              return cubit.internetConnect?Visibility(
+                                visible: !cubit.loading,
+                                child: Container(
+                                  //padding: EdgeInsets.symmetric(vertical: ScreenSize.h32),
+                                  child: const Center(child: Loading()),
+                                ),
+                              ):Container(
+                                height: ScreenSize.h32,
+                                width: double.maxFinite,
+                                alignment: Alignment.center,
+                                child: Text(tr('delivery.error'),style: AppTheme.data.textTheme.displayLarge),
+                              );
+                            }
+                          }
+                          ),
+                        ))
+                      ]))      
                 ],
               ),
               Visibility(
