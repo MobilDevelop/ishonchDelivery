@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 List<OrderItem> orderItemFromMap(List list)=>List<OrderItem>.from(list.map((json) => OrderItem.fromJson(json)));
 
 List<OrderItem> orderItemMemoryFromMap(List list)=>List<OrderItem>.from(list.map((json) => OrderItem.fromJsonMemory(json)));
@@ -30,7 +32,7 @@ class OrderItem{
   factory OrderItem.fromJson(Map<String,dynamic> json)=>OrderItem(
     id: json['id']??-1, 
     amount: json['product_delivery']['amount']??"", 
-    address: json['product_delivery']['address']??"",
+    address: json['product_delivery']['region']["region_name"]+", "+json['product_delivery']['village']["village_name"]+", "+json['product_delivery']['address']??"",
     orientation: json['product_delivery']['orientation']??"", 
     phone: json['product_delivery']['main_phone_number']??"",
     addtionalPhone: json['product_delivery']['additional_phone_number']??"", 

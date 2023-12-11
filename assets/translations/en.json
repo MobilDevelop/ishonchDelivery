@@ -27,8 +27,11 @@
         "phone":"Telefon raqami:",
         "addtionalphone":"Qo'shimcha telefon raqami:",
         "comment":"Izoh: ",
-        "error":"Server bilan aloqa yo'q"
-
+        "reason":"Sababi: ",
+        "reasoncomment":"Qo'shimcha: ",
+        "time":"Yetkazish vaqti: ",
+        "error":"Server bilan aloqa yo'q",
+        "choose":"Sababni tanlang"
     },
     "user_page":{
         "title":"Kabinet",

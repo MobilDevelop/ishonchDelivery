@@ -65,14 +65,11 @@ class CompletedPage extends StatelessWidget {
                           padding: const EdgeInsets.all(0),
                           itemBuilder: (_, index){
                             if(index<cubit.itemsCompleted.length){
-                              return CompletedItem(item: cubit.itemsCompleted[index]);
+                              return CompletedItem(item: cubit.itemsCompleted[index],type: 1);
                             }else{
                               return cubit.internetConnect?Visibility(
                                 visible: !cubit.loading,
-                                child: Container(
-                                  //padding: EdgeInsets.symmetric(vertical: ScreenSize.h32),
-                                  child: const Center(child: Loading()),
-                                ),
+                                child: const Center(child: Loading()),
                               ):Container(
                                 height: ScreenSize.h32,
                                 width: double.maxFinite,
@@ -101,14 +98,11 @@ class CompletedPage extends StatelessWidget {
                           padding: const EdgeInsets.all(0),
                           itemBuilder: (_, index){
                             if(index<cubit.itemsCanceled.length){
-                              return CompletedItem(item: cubit.itemsCanceled[index]);
+                              return CompletedItem(item: cubit.itemsCanceled[index],type:2);
                             }else{
                               return cubit.internetConnect?Visibility(
                                 visible: !cubit.loading,
-                                child: Container(
-                                  //padding: EdgeInsets.symmetric(vertical: ScreenSize.h32),
-                                  child: const Center(child: Loading()),
-                                ),
+                                child: const Center(child: Loading()),
                               ):Container(
                                 height: ScreenSize.h32,
                                 width: double.maxFinite,

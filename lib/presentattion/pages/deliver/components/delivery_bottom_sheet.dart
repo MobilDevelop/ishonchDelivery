@@ -30,63 +30,67 @@ class DeliveryBottomSheet extends StatelessWidget {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-            Column(
-              children: [
-                 Gap(ScreenSize.h10),
-             Container(
-            height: ScreenSize.h4,
-            width: 130.w,
-            decoration: BoxDecoration(
-              color: AppTheme.colors.black,
-              borderRadius: BorderRadius.circular(4.r)
-            ),
-          ),
-          Gap(ScreenSize.h32),
-          DropdownSearch<CancelItem>(
-                                mode: Mode.MENU,
-                                items: items,
-                                dropdownSearchDecoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal:0),
-                                hintText: tr('search.hint'),
-                                prefixIcon: Visibility(
-                                  visible: false,
-                                  child: IconButton(onPressed: (){}, icon: const Icon(Icons.close,color: Colors.black))),
-                                enabledBorder: OutlineInputBorder(
-                                borderRadius:BorderRadius.circular(10.r),
-                                borderSide: BorderSide(
-                                color: AppTheme.colors.primary)),
-                                focusedBorder: OutlineInputBorder(
-                                borderRadius:BorderRadius.circular(10.r),
-                                borderSide: BorderSide(
-                                color: AppTheme.colors.primary))),
-                                selectedItem: item,
-                                itemAsString: (CancelItem? item) {
-                                return item!.title.toString();},
-                                onChanged: (item)=>onChanged(item)
-                                ),
-          Gap(ScreenSize.h32),
-           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-             children: [
-               Text(tr("delivery.address"),style: AppTheme.data.textTheme.bodyMedium!.copyWith(color: AppTheme.colors.primary)),
-               Gap(ScreenSize.h4),
-               Container(
-                width: double.maxFinite,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                     Gap(ScreenSize.h10),
+                 Container(
+                height: ScreenSize.h4,
+                width: 130.w,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(
-                    color: AppTheme.colors.primary,
-                    width: .6
-                  )
+                  color: AppTheme.colors.black,
+                  borderRadius: BorderRadius.circular(4.r)
                 ),
-                child: TextField(
-                  controller: controller,
-                  maxLines: 5,
+                        ),
+                        Gap(ScreenSize.h32),
+                        DropdownSearch<CancelItem>(
+                                    mode: Mode.MENU,
+                                    items: items,
+                                    dropdownSearchDecoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal:0),
+                                    hintText: tr('delivery.choose'),
+                                    prefixIcon: Visibility(
+                                      visible: false,
+                                      child: IconButton(onPressed: (){}, icon: const Icon(Icons.close,color: Colors.black))),
+                                    enabledBorder: OutlineInputBorder(
+                                    borderRadius:BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                    color: AppTheme.colors.primary)),
+                                    focusedBorder: OutlineInputBorder(
+                                    borderRadius:BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                    color: AppTheme.colors.primary))),
+                                    selectedItem: item,
+                                    itemAsString: (CancelItem? item) {
+                                    return item!.title.toString();},
+                                    onChanged: (item)=>onChanged(item)
+                                    ),
+                        Gap(ScreenSize.h32),
+                         Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   Text(tr("delivery.comment"),style: AppTheme.data.textTheme.bodyMedium!.copyWith(color: AppTheme.colors.primary)),
+                   Gap(ScreenSize.h4),
+                   Container(
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.r),
+                      border: Border.all(
+                        color: AppTheme.colors.primary,
+                        width: .6
+                      )
+                    ),
+                    child: TextField(
+                      controller: controller,
+                      maxLines: 5,
+                    ),
+                   ),
+                 ],
+                         )
+                  ],
                 ),
-               ),
-             ],
-           )
-              ],
+              ),
             ),
             Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

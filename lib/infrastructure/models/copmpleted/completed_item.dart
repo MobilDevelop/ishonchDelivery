@@ -5,6 +5,8 @@ List<CompltedItem> completedItemMemoryFromMap(List list)=>List<CompltedItem>.fro
 
 class CompltedItem extends OrderItem{
   String deliveryDateTime;
+  String? cancelReason;
+  String camcelComment;
 
   CompltedItem({
     required super.id, 
@@ -16,7 +18,9 @@ class CompltedItem extends OrderItem{
     required super.name, 
     required super.comment, 
     required super.productTitle,
-    required this.deliveryDateTime});
+    required this.deliveryDateTime,
+    required this.camcelComment,
+    this.cancelReason});
     
       factory CompltedItem.fromJson(Map<String,dynamic> json)=>CompltedItem(
     id: json['id']??-1, 
@@ -28,7 +32,9 @@ class CompltedItem extends OrderItem{
     name: json['product_delivery']['receiver_full_name']??"", 
     comment: json['product_delivery']['comment']??"", 
     productTitle: json['product_variant']['product_variant_title']??"",
-    deliveryDateTime: json['delivery']==null?"":json['delivery']['delivery_at']??"");
+    camcelComment: json['comment'],
+    deliveryDateTime: json['delivery']==null?"":json['delivery']['delivery_at']??"",
+    cancelReason: json['delivery_cancel_reason']==null?"":json['delivery_cancel_reason']['title']);
 
     factory CompltedItem.fromJsonMemory(Map<String,dynamic> json)=>CompltedItem(
     id: json['id']??-1, 
@@ -40,7 +46,9 @@ class CompltedItem extends OrderItem{
     name: json['name']??"", 
     comment: json['comment']??"", 
     productTitle: json['productTitle']??"",
-    deliveryDateTime: json['deliveryDate']??"");
+    deliveryDateTime: json['deliveryDate']??"",
+    camcelComment: json['cancelComment'],
+    cancelReason: json['reason']);
 
     Map<String,dynamic> toJson()=>{
       "id":id,
@@ -52,6 +60,8 @@ class CompltedItem extends OrderItem{
       "name":name,
       "comment":comment,
       "productTitle":productTitle,
-      "deliveryDate":deliveryDateTime
+      "deliveryDate":deliveryDateTime,
+      'cancelComment':camcelComment,
+      'reason':cancelReason
     };
 }

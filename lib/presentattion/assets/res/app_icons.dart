@@ -11,6 +11,7 @@ class AppIcons {
   static const String mlocation = 'assets/icons/mlocation.svg';
   static const String password = 'assets/icons/password.svg';
   static const String swap = 'assets/icons/swap.svg';
+  static const String user = 'assets/icons/user.svg';
 
 
 

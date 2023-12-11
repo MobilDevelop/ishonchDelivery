@@ -55,8 +55,8 @@ try {
     internetConnect=true;
       List<CompltedItem>  pageItems = await CompletedServices().init("canceled",page2.toString());
      if(pageItems.isNotEmpty){
-      itemsCompleted.addAll(pageItems);
-      await LocalSource.putInfo(key: "canceled", json: jsonEncode(itemsCompleted.map((item) => item.toJson()).toList()));
+      itemsCanceled.addAll(pageItems);
+      await LocalSource.putInfo(key: "canceled", json: jsonEncode(itemsCanceled.map((item) => item.toJson()).toList()));
       page2++;
       pageItems.clear();
      }else{

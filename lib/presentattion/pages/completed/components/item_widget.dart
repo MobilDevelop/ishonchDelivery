@@ -11,9 +11,10 @@ import 'package:kuryer/presentattion/assets/theme/app_theme.dart';
 
 class CompletedItem extends StatelessWidget {
   const CompletedItem({
-    super.key, required this.item,
+    super.key, required this.item, required this.type,
   });
   final CompltedItem item;
+  final int type;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +32,7 @@ class CompletedItem extends StatelessWidget {
             )
           ],
           border: Border.all(
-            color: Colors.green,
+            color: type==1?Colors.green:AppTheme.colors.red,
             width: 2
           ),
           borderRadius: BorderRadius.circular(15.r)
@@ -159,13 +160,46 @@ class CompletedItem extends StatelessWidget {
             Gap(ScreenSize.h8),
             DottedLine(dashColor: AppTheme.colors.grey),
             Gap(ScreenSize.h8),
-            Row(
+            type==1? Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Yetkazilgan vaqti: ",style: AppTheme.data.textTheme.bodyLarge!.copyWith(color: AppTheme.colors.primary.withOpacity(.7))),
+              Text(tr('delivery.time'),style: AppTheme.data.textTheme.bodyLarge!.copyWith(color: AppTheme.colors.primary.withOpacity(.7))),
               Text(item.deliveryDateTime,
                     style: AppTheme.data.textTheme.titleMedium!.copyWith(color: AppTheme.colors.primary)),
             ],
+            ):Column(
+              children: [
+                Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(tr('delivery.reason'),style: AppTheme.data.textTheme.bodyLarge!.copyWith(color: AppTheme.colors.primary.withOpacity(.7))),
+                  Expanded(
+                    child: Text(item.cancelReason!,
+                          textAlign: TextAlign.end,
+                          style: AppTheme.data.textTheme.bodyMedium!.copyWith(color: AppTheme.colors.primary)),
+                  ),
+                ],
+                ),
+                Visibility(
+                  visible: item.camcelComment.isNotEmpty,
+                  child: Column(
+                    children: [
+                      Gap(ScreenSize.h10),
+                      Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(tr('delivery.reasoncomment'),style: AppTheme.data.textTheme.bodyLarge!.copyWith(color: AppTheme.colors.primary.withOpacity(.7))),
+                        Expanded(
+                          child: Text(item.camcelComment,
+                                textAlign: TextAlign.end,
+                                style: AppTheme.data.textTheme.bodyMedium!.copyWith(color: AppTheme.colors.primary)),
+                        ),
+                      ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             )
             ],
             )      

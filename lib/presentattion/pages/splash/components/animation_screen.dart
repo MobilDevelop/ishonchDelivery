@@ -74,7 +74,7 @@ class _AnimationScreenState extends State<AnimationScreen> with SingleTickerProv
             alignment: Alignment.bottomCenter,
             child: Opacity(
               opacity: _animation.textOpacity.value,
-              child: Text(
+              child: const Text(
                 'ISHONCH DELIVERY',
                 style: TextStyle(
                     color: Colors.white, fontSize: 32
