@@ -9,11 +9,13 @@ import 'package:kuryer/infrastructure/helper/helper.dart';
 import 'package:kuryer/infrastructure/local_source/local_source.dart';
 import 'package:kuryer/infrastructure/models/delivery_order/cancel_item.dart';
 import 'package:kuryer/infrastructure/models/delivery_order/canceled.dart';
+import 'package:kuryer/infrastructure/models/delivery_order/delivery_filter.dart';
 import 'package:kuryer/infrastructure/models/delivery_order/order_item.dart';
 import 'package:kuryer/infrastructure/models/delivery_order/succes_item.dart';
+import 'package:kuryer/infrastructure/models/login/login_info.dart';
 class DeliverCubit extends Cubit<DeliverState>{
   DeliverCubit():super(DeliverInitial()){
-     init();
+     init({});
   }
   bool loading = true;
   bool serviceConnect =true;
@@ -27,16 +29,24 @@ class DeliverCubit extends Cubit<DeliverState>{
 
   CancelItem? cancelItem;
 
+  List<DeliveryFilterItem> regions =[];
+
   int page =1;
   int itemId = -1;
 
-  void init()async{
+  UserInfo? userInfo;
+
+  void init(Map<String,dynamic> infoParam)async{
     if(serviceConnect){    
       try {
   final result = await InternetAddress.lookup('example.com');
   if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
     internetConnect=true;
-      List<OrderItem> pageItems = await DeliveryService().init(page.toString());
+     Map<String,dynamic> param ={
+      "page":page,
+      "mode":"not_delivered"};
+      param.addAll(infoParam);
+      List<OrderItem> pageItems = await DeliveryService().init(param);
      if(pageItems.isNotEmpty){
       items.addAll(pageItems);
       await LocalSource.putInfo(key: "delivery_order", json: jsonEncode(items.map((item) => item.toJson()).toList()));
@@ -45,6 +55,11 @@ class DeliverCubit extends Cubit<DeliverState>{
      }else{
       serviceConnect=false;
      }
+     String json = await LocalSource.getInfo(key: 'userInfo');
+    if(json.isNotEmpty){
+      userInfo = UserInfo.fromJson(jsonDecode(json));
+    }
+    regions = await DeliveryService().regions(userInfo?.provinceId??"");
   //   internetConnect=false;
   //  String jsonItems = await LocalSource.getInfo(key: "delivery_order");
   //  if(jsonItems.isNotEmpty){
@@ -59,11 +74,23 @@ class DeliverCubit extends Cubit<DeliverState>{
     items.clear();
     items = orderItemMemoryFromMap(jsonDecode(jsonItems));
     items.reversed.toList();
-    print(items);
    }
 }      
     loading =false;
     getCanceledItems();
+   }
+  }
+
+  void filterActive(Map<String,dynamic> info){
+    if(!loading){
+    page=1;
+    itemId=-1;
+    serviceConnect=true;
+    loading=true;
+    items.clear();
+    loading=true;
+    emit(DeliverInitial());
+    init(info);
    }
   }
 
@@ -121,7 +148,7 @@ class DeliverCubit extends Cubit<DeliverState>{
     page=1;
     itemId=-1;
     serviceConnect=true;
-    init();
+    init({});
   }
 
 
@@ -140,7 +167,7 @@ class DeliverCubit extends Cubit<DeliverState>{
     page=1;
     itemId=-1;
     serviceConnect=true;
-    init();
+    init({});
     }
     }else{
      dynamic resendJson = await LocalSource.getInfo(key: 'resendCancelItems');
@@ -190,7 +217,7 @@ class DeliverCubit extends Cubit<DeliverState>{
     items.clear();
     loading=true;
     emit(DeliverInitial());
-    init();
+    init({});
    }
    }else{
     emit(DeliverNextSplash());

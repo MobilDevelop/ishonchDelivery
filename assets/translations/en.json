@@ -18,6 +18,14 @@
         "exit":"CHIQISH"
 
     },
+    "completed" :{
+        "finished":"Yakunlangan",
+        "cancelled":"Bekor qilingan",
+        "approved":"Tasdiqlangan",
+        "region":"Viloyatni tanlang",
+        "district":"Hududni tanlang",
+        "time":"Vaqtni tanlang"
+    },
     "delivery":{
         "title":"Topshiriq",
         "cancel":"Bekor qilish",
@@ -31,7 +39,9 @@
         "reasoncomment":"Qo'shimcha: ",
         "time":"Yetkazish vaqti: ",
         "error":"Server bilan aloqa yo'q",
-        "choose":"Sababni tanlang"
+        "choose":"Sababni tanlang",
+        "region":"Viloyatni tanlang",
+        "district":"Hududni tanlang"
     },
     "user_page":{
         "title":"Kabinet",

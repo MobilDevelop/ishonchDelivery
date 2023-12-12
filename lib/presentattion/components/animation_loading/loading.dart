@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:kuryer/infrastructure/helper/helper.dart';
-import 'package:kuryer/presentattion/assets/res/screen_size.dart';
 import 'package:kuryer/presentattion/assets/theme/app_theme.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 

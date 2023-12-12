@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:kuryer/infrastructure/models/copmpleted/completed_item.dart';
+import 'package:kuryer/infrastructure/models/completed/completed_item.dart';
 import 'package:kuryer/presentattion/assets/res/app_icons.dart';
 import 'package:kuryer/presentattion/assets/res/screen_size.dart';
 import 'package:kuryer/presentattion/assets/theme/app_theme.dart';

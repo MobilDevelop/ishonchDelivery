@@ -8,6 +8,7 @@ class UserInfo {
   bool active;
   String additionalnformation;
   String carnumber;
+  String provinceId;
 
   UserInfo({
     required this.id,
@@ -18,7 +19,8 @@ class UserInfo {
     required this.phone,
     required this.active,
     required this.additionalnformation,
-    required this.carnumber
+    required this.carnumber,
+    required this.provinceId
     });
 
     factory UserInfo.fromJson(Map<String,dynamic> json)=>UserInfo(
@@ -30,7 +32,8 @@ class UserInfo {
       phone: json['phone'], 
       active: json['active'], 
       additionalnformation: json['driver']['additional_information'], 
-      carnumber: json['driver']['plate_number']);
+      carnumber: json['driver']['plate_number'], 
+      provinceId: json['organization_analytic']['region']['province_id'].toString());
 
       
 }
