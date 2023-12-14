@@ -52,7 +52,9 @@ class CompletedCubit extends Cubit<CompletedState>{
       List<CompltedItem>  pageItems = await CompletedServices().init(param);
      if(pageItems.isNotEmpty){
       itemsCompleted.addAll(pageItems);
-      await LocalSource.putInfo(key: "completed", json: jsonEncode(itemsCompleted.map((item) => item.toJson()).toList()));
+      if(param.length<3){
+        await LocalSource.putInfo(key: "completed", json: jsonEncode(itemsCompleted.map((item) => item.toJson()).toList()));
+      }
       page1++;
       pageItems.clear();
      }else{
@@ -88,7 +90,9 @@ try {
       List<CompltedItem>  pageItems = await CompletedServices().init(param);
      if(pageItems.isNotEmpty){
       itemsCanceled.addAll(pageItems);
-      await LocalSource.putInfo(key: "canceled", json: jsonEncode(itemsCanceled.map((item) => item.toJson()).toList()));
+     if(param.length<3){
+       await LocalSource.putInfo(key: "canceled", json: jsonEncode(itemsCanceled.map((item) => item.toJson()).toList()));
+     }
       page2++;
       pageItems.clear();
      }else{

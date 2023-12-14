@@ -79,7 +79,26 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       scale: scalAnimation.value,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(25.r),
-                        child: cubit.views[cubit.currentPage])),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            cubit.views[cubit.currentPage],
+                            Visibility(
+                              visible: !cubit.isSideMenuclosed,
+                              child: GestureDetector(
+                                onTap: (){
+                                   _animationController.reverse();
+                                   cubit.isOpen();
+                                },
+                                child: Container(
+                                  height: double.maxFinite,
+                                  width: double.maxFinite,
+                                  color: AppTheme.colors.grey.withOpacity(.3),
+                                ),
+                              ),
+                            )
+                          ],
+                        ))),
                     ),
                 ),
                AnimatedPositioned(

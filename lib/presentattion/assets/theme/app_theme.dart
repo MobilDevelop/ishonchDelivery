@@ -81,7 +81,7 @@ class AppTheme {
 
 
     data = ThemeData( 
-      fontFamily: 'Cabin',
+      fontFamily: 'SfProDisplay',
       textTheme: textTheme,
       backgroundColor: colors.background,
       scaffoldBackgroundColor: colors.background,

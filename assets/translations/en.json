@@ -22,7 +22,7 @@
         "finished":"Yakunlangan",
         "cancelled":"Bekor qilingan",
         "approved":"Tasdiqlangan",
-        "region":"Viloyatni tanlang",
+        "region":"Tummani tanlang",
         "district":"Hududni tanlang",
         "time":"Vaqtni tanlang"
     },
@@ -37,11 +37,12 @@
         "comment":"Izoh: ",
         "reason":"Sababi: ",
         "reasoncomment":"Qo'shimcha: ",
-        "time":"Yetkazish vaqti: ",
+        "time":"Yetkazilgan vaqti: ",
         "error":"Server bilan aloqa yo'q",
         "choose":"Sababni tanlang",
-        "region":"Viloyatni tanlang",
-        "district":"Hududni tanlang"
+        "region":"Tummani tanlang",
+        "district":"Hududni tanlang",
+        "empty":"Ma'lumotlar topilmadi"
     },
     "user_page":{
         "title":"Kabinet",

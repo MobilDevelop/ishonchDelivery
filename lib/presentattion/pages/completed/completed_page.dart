@@ -27,6 +27,7 @@ class CompletedPage extends StatelessWidget {
         return BlocBuilder<CompletedCubit,CompletedState>(builder: (_, state) => Scaffold(
            appBar: AppBar(
             backgroundColor: AppTheme.colors.primary,
+            centerTitle: true,
             elevation: 0,
             title:  Text(tr('completed.finished'),style: AppTheme.data.textTheme.headlineSmall!.copyWith(color: AppTheme.colors.white)),
             actions: [

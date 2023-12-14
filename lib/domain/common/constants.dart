@@ -1,10 +1,9 @@
 
-class AppContatants{
-//static String mainUrl = "http://167.71.143.107";//real URL
-static String mainUrl = "http://192.168.13.138:8002";//test URL
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-  //static String addition = "/api/api/m_statistics/";//real
-  static String addition = "/api/";//test
+class AppContatants{
+
+  static String addition = dotenv.env['addition']!;//test
    
   static String login = '${addition}login';
   static String order = '${addition}m_delivery_order';

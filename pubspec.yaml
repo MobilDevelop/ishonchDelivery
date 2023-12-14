@@ -34,6 +34,7 @@ dependencies:
   geolocator: ^10.1.0
   dropdown_search: ^3.0.1
   awesome_dialog: ^3.1.0
+  flutter_dotenv: ^5.1.0
 
   # State management
   flutter_bloc: ^8.1.2
@@ -72,6 +73,7 @@ flutter:
     - assets/translations/
     - assets/images/
     - assets/riv/
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -98,6 +100,24 @@ flutter:
     - family: NotoSerif
       fonts:
         - asset: assets/fonts/NotoSerif.ttf
+        
+    - family: SfProDisplay
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-Bold.ttf
+          weight: 900
+        - asset: assets/fonts/SF-Pro-Display-Semibold.ttf
+          weight: 800
+        - asset: assets/fonts/SF-Pro-Display-Medium.ttf
+          weight: 700
+        - asset: assets/fonts/SF-Pro-Display-Regular.ttf
+          weight: 600
+        - asset: assets/fonts/SF-Pro-Display-Light.ttf
+          weight: 500
+        - asset: assets/fonts/SF-Pro-Display-Thin.ttf
+          weight: 300
+        - asset: assets/fonts/SF-Pro-Display-Ultralight.ttf
+          weight: 300
+    
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

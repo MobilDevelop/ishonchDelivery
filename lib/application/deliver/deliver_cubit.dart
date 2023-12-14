@@ -49,7 +49,9 @@ class DeliverCubit extends Cubit<DeliverState>{
       List<OrderItem> pageItems = await DeliveryService().init(param);
      if(pageItems.isNotEmpty){
       items.addAll(pageItems);
-      await LocalSource.putInfo(key: "delivery_order", json: jsonEncode(items.map((item) => item.toJson()).toList()));
+     if(param.length<3){
+       await LocalSource.putInfo(key: "delivery_order", json: jsonEncode(items.map((item) => item.toJson()).toList()));
+     }
       page++;
       pageItems.clear();
      }else{
@@ -60,12 +62,6 @@ class DeliverCubit extends Cubit<DeliverState>{
       userInfo = UserInfo.fromJson(jsonDecode(json));
     }
     regions = await DeliveryService().regions(userInfo?.provinceId??"");
-  //   internetConnect=false;
-  //  String jsonItems = await LocalSource.getInfo(key: "delivery_order");
-  //  if(jsonItems.isNotEmpty){
-  //   items.clear();
-  //   items = orderItemMemoryFromMap(jsonDecode(jsonItems));
-  //  }
   }
 } on SocketException catch (_){
   internetConnect=false;
@@ -215,6 +211,7 @@ class DeliverCubit extends Cubit<DeliverState>{
     serviceConnect=true;
     loading=true;
     items.clear();
+    await LocalSource.putInfo(key: "delivery_order", json:null);
     loading=true;
     emit(DeliverInitial());
     init({});

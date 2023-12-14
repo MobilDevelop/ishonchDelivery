@@ -41,6 +41,7 @@ class DeliverPage extends StatelessWidget {
           backgroundColor: AppTheme.colors.background,
           appBar: AppBar(
             backgroundColor: AppTheme.colors.primary,
+            centerTitle: true,
             elevation: 0,
             title:  Text(tr('delivery.title'),style: AppTheme.data.textTheme.headlineSmall!.copyWith(color: AppTheme.colors.white)),
             actions: [
@@ -122,10 +123,17 @@ class DeliverPage extends StatelessWidget {
                      }
                      }
                      );
-                    }else{
+                    }else{ 
+                      if(cubit.items.length%15!=0){
+                        return Container();
+                      }
                       return cubit.internetConnect?Visibility(
                         visible: !cubit.loading,
-                        child: Container(
+                        child: cubit.items.isEmpty?Container(
+                          margin: EdgeInsets.only(top: ScreenSize.h32),
+                          alignment: Alignment.center,
+                          child: Text(tr('delivery.empty'),style: AppTheme.data.textTheme.displaySmall),
+                        ):Container(
                           padding: EdgeInsets.symmetric(vertical: ScreenSize.h32),
                           child: const Center(child: Loading()),
                         ),
