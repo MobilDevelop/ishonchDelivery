@@ -39,6 +39,8 @@ class CompletedCubit extends Cubit<CompletedState>{
 
 
   void init(Map<String,dynamic> info)async{
+    loading =true;
+    emit(CompletedInitial());
     if(serviceConnect){
       try {
   final result = await InternetAddress.lookup('example.com');
@@ -107,9 +109,9 @@ try {
     itemsCompleted = completedItemMemoryFromMap(jsonDecode(jsonItems));
    }
 }
-    loading =false;
-    emit(CompletedInitial());
    }
+   loading =false;
+    emit(CompletedInitial());
   }
   void onSelected(CompletedFilter filt ){
     filterItem = filt;

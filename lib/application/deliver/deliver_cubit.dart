@@ -16,6 +16,7 @@ import 'package:kuryer/infrastructure/models/login/login_info.dart';
 class DeliverCubit extends Cubit<DeliverState>{
   DeliverCubit():super(DeliverInitial()){
      init({});
+      getCanceledItems();
   }
   bool loading = true;
   bool serviceConnect =true;
@@ -37,6 +38,8 @@ class DeliverCubit extends Cubit<DeliverState>{
   UserInfo? userInfo;
 
   void init(Map<String,dynamic> infoParam)async{
+    loading=true;
+    emit(DeliverInitial());
     if(serviceConnect){    
       try {
   final result = await InternetAddress.lookup('example.com');
@@ -73,7 +76,7 @@ class DeliverCubit extends Cubit<DeliverState>{
    }
 }      
     loading =false;
-    getCanceledItems();
+    emit(DeliverInitial());
    }
   }
 
@@ -211,7 +214,6 @@ class DeliverCubit extends Cubit<DeliverState>{
     serviceConnect=true;
     loading=true;
     items.clear();
-    await LocalSource.putInfo(key: "delivery_order", json:null);
     loading=true;
     emit(DeliverInitial());
     init({});
